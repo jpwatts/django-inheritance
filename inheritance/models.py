@@ -5,12 +5,7 @@ from django.db.models.query import QuerySet
 class ChildQuerySet(QuerySet):
     def iterator(self):
         for obj in super(ChildQuerySet, self).iterator():
-            try:
-                child = obj.get_child_object()
-            except AttributeError:
-                pass
-            else:
-                yield child
+            yield obj.get_child_object()
 
 
 class ChildManager(models.Manager):
